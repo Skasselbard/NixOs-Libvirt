@@ -1,7 +1,9 @@
 { ... }:
 {
   imports = [
-    ./virtualisation
+    builtins.fetchGit {
+      url = "https://github.com/Skasselbard/NixOs-Libvirt";
+    }
     ./partitioning.nix
     ./network.nix
   ];
