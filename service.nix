@@ -72,7 +72,7 @@ with lib; {
               }
             else
               "") domain.disks));
-        after = [ "libvirtd.service" ];
+        after = [ "libvirtd.service" "network.target" ];
         requires = [ "libvirtd.service" ];
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {

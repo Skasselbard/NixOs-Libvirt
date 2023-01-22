@@ -8,7 +8,7 @@
     # build qcow image from nix. The last cmd line will be the store path.
     store_image=$(nixos-generate -f qcow -c ${disk.path} | tail -1)
     if [[ -n $store_image ]]; then 
-      echo "nixos-generate failed and returned no path"
+      echo "nixos-generate failed and returned no path" 1>&2
       exit 1
     fi
 
