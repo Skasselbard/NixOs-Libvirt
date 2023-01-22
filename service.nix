@@ -72,17 +72,13 @@ with lib; {
               }
             else
               "") domain.disks));
-        after = [
-          "libvirtd.service"
-          # "systemd-networkd-wait-online.service"
-          # "nss-lookup.target"
-          "nix-deamon.service"
-        ];
+        after = [ "libvirtd.service" "nix-deamon.service" ];
         requires = [ "libvirtd.service" "nix-deamon.service" ];
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = "yes";
+          user = "root";
         };
         script = (import ./scripts.nix).defineDomain {
           inherit pkgs name;
