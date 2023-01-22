@@ -5,8 +5,6 @@
     # make the script fail if any cmd returns nonzero
     set -e
 
-    export NIX_REMOTE=daemon
-
     # build qcow image from nix. The last cmd line will be the store path.
     store_image=$(nixos-generate -f qcow -c ${disk.path} --show-trace | tail -1)
     if [[ -n $store_image ]]; then 
