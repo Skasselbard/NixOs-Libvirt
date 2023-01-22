@@ -81,6 +81,8 @@ with lib; {
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = "yes";
+          User = "root";
+          Group = "nixbld";
         };
         script = (import ./scripts.nix).defineDomain {
           inherit pkgs name;
