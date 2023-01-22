@@ -64,7 +64,7 @@ with lib; {
         path = with pkgs; [ nixos-generators qemu libguestfs git ];
         environment = {
           NIX_PATH = config.nix_path;
-          NIX_REMOTE = "deamon";
+          # NIX_REMOTE = "deamon";
         };
         preStart = concatStrings (builtins.attrValues (attrsets.mapAttrs
           (disk_name: disk:
