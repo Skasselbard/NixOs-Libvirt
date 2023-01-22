@@ -62,7 +62,10 @@ with lib; {
     systemd.services = lib.mapAttrs' (name: domain:
       lib.nameValuePair "libvirtd-domain-${name}" {
         path = with pkgs; [ nixos-generators qemu libguestfs git ];
-        environment = { NIX_PATH = config.nix_path; };
+        environment = {
+          NIX_PATH = config.nix_path;
+          NIX_REMOTE = "deamon";
+        };
         preStart = concatStrings (builtins.attrValues (attrsets.mapAttrs
           (disk_name: disk:
             if disk.type == "nix" then
@@ -78,7 +81,6 @@ with lib; {
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = "yes";
-          user = "root";
         };
         script = (import ./scripts.nix).defineDomain {
           inherit pkgs name;
