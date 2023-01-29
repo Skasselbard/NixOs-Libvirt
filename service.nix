@@ -86,7 +86,7 @@ with lib; {
         };
         script = (import ./scripts.nix).defineDomain {
           inherit pkgs name;
-          xml = builtins.toFile "${name}.xml" domain.xml;
+          xml = pkgs.writeText "${name}.xml" domain.xml;
         };
         preStop = (import ./scripts.nix).stopDomain { inherit pkgs name; };
       }) domains;
